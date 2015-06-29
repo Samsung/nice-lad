@@ -1,0 +1,4 @@
+active = yes
+direction = out
+path = @SBIN_DIR@/nice-lad
+type = always
