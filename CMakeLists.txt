@@ -14,12 +14,20 @@
 #
 # @file        CMakeLists.txt
 # @author      Aleksander Zdyb <a.zdyb@samsung.com>
+# @author      Oskar Świtalski <o.switalski@samsung.com>
 #
 
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.3)
 PROJECT(nice-lad)
 
 OPTION(WITH_TESTS "Build tests" ON)
+
+############################# compiler flags ##################################
+
+SET(CMAKE_CXX_FLAGS_PROFILING  "-O0 -g -pg")
+SET(CMAKE_CXX_FLAGS_DEBUG      "-O0 -g -ggdb")
+SET(CMAKE_CXX_FLAGS_RELEASE    "-O2 -g")
+SET(CMAKE_CXX_FLAGS_CCOV       "-O2 -g --coverage")
 
 # Check for C++11 support and enable proper compilation flags
 INCLUDE(CheckCXXCompilerFlag)
@@ -34,6 +42,10 @@ ELSE()
         MESSAGE(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
     ENDIF()
 ENDIF()
+
+IF (CMAKE_BUILD_TYPE MATCHES "DEBUG")
+    ADD_DEFINITIONS("-DBUILD_TYPE_DEBUG")
+ENDIF (CMAKE_BUILD_TYPE MATCHES "DEBUG")
 
 SET(BIN_DIR
     "${CMAKE_INSTALL_PREFIX}/bin"

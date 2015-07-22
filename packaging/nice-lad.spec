@@ -41,8 +41,12 @@ cp -a %{SOURCE1001} .
 cp -a %{SOURCE1002} .
 
 %build
-%if 0%{?sec_build_binary_debug_enable}
+%if 0%{?sec_build_binary_debug_enable:1}
 export CXXFLAGS="$CXXFLAGS -DTIZEN_DEBUG_ENABLE"
+%endif
+
+%if 0%{!?build_type:1}
+%define build_type RELEASE
 %endif
 
 %if %{?build_type} == "DEBUG"
