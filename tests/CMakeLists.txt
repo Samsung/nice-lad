@@ -46,6 +46,7 @@ SET(SOURCE_FILES
     Audit/syscall_rule_data.cpp
     Lad/audit_event_handler.cpp
     SecurityManager/data_provider.cpp
+    Utils/with_message_exception.cpp
 
     ${LAD_SRC_DIR}/Audit/Auditctl.cpp
     ${LAD_SRC_DIR}/Audit/Parser.cpp

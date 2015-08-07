@@ -14,33 +14,26 @@
  *    limitations under the License.
  */
 /**
- * @file        src/Audit/WithMessageException.h
- * @author      Aleksander Zdyb <a.zdyb@samsung.com>
+ * @file        tests/Utils/with_message_exception.cpp
+ * @author      Oskar Świtalski <o.switalski@samsung.com>
  * @version     1.0
  */
 
-#ifndef SRC_UTILS_WITHMESSAGEEXCEPTION_H
-#define SRC_UTILS_WITHMESSAGEEXCEPTION_H
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
 
-#include <exception>
-#include <string>
+#include <Utils/WithMessageException.h>
 
-namespace Utils {
-
-class WithMessageException : public std::exception {
-public:
-    WithMessageException(const std::string &message) : m_message(message) {}
-    virtual ~WithMessageException() = default;
-
-    virtual const char *what() const noexcept {
-        return m_message.c_str();
-    }
-
-private:
-    std::string m_message;
-};
-
-} // namespace Utils
-
-
-#endif // SRC_UTILS_WITHMESSAGEEXCEPTION_H
+/**
+ * @brief   WithMessageException should publicly inherit from std::exception
+ *
+ * Exception class must publicly inherit from another class, if child class is ought to be catched
+ * by parent class catch block.
+ *
+ * @test    Scenario:
+ * - throw WithMessageException
+ * - check if std::exception could be catched
+ */
+TEST(WithMessageException, inherit_publicly_from_std_exception) {
+    EXPECT_THROW(throw Utils::WithMessageException(""), std::exception);
+}
