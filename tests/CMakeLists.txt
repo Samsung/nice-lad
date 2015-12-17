@@ -16,7 +16,7 @@
 # @author      Aleksander Zdyb <a.zdyb@samsung.com>
 #
 
-FIND_PACKAGE(Boost 1.57 REQUIRED)
+FIND_PACKAGE(Boost REQUIRED)
 
 FIND_PACKAGE(Threads REQUIRED) # Required by gmock
 
